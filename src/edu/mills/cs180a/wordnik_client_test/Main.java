@@ -26,10 +26,13 @@ public class Main {
         WordsApi wordsApi = client.buildClient(WordsApi.class);
         WordApi wordApi = client.buildClient(WordApi.class);
         WordOfTheDay word = wordsApi.getWordOfTheDay("2022-03-15");
-        List<WordObject> randomWords =
-                wordsApi.getRandomWords("true", "", "", null, -1, 1, -1, 5, -1, "", "", 10);
+        List<String> dict = new ArrayList<>();
+        dict.add("all");
+
         WordObject random =
-                wordsApi.getRandomWord(null, null, null, null, null, null, null, null, null);
-        System.out.println(wordApi.getScrabbleScore("none"));
+                wordsApi.getRandomWord("true", "noun", null, null, null, null, null, null, null);
+        System.out.println("Defniition of " + random.getWord() + ":");
+        System.out.println(wordApi.getDefinitions(random.getWord(), 10, "noun", "false", dict,
+                "false", "false"));
     }
 }
